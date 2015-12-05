@@ -1,0 +1,26 @@
+from app import app
+import fitbit
+import ConfigParser
+import requests
+import oauth2
+import urlparse
+from flask import render_template, request, send_from_directory
+
+consumer_key='709255b3ccd60926243482557587190e'
+client_secret='9afc51333f6623a126190800349a57d7'
+resource_owner_key='39673cbdee35eb5b8f6be194fb7fcce6'
+resource_owner_secret='c0f2698570f4a83592992f9d7b3d627f'
+
+client2=fitbit.Fitbit(consumer_key, client_secret, resource_owner_key = resource_owner_key, resource_owner_secret = resource_owner_secret)
+print client2._COLLECTION_RESOURCE('activities')
+
+
+@app.route('/')
+@app.route('/index')
+def index():
+    #content = requests.get('https://api.fitbit.com/1/user/-/activities/steps/date/today/1m.json')
+    #print content.json()
+    user = {'nickname': 'Ionel'}  # fake user
+    return render_template('index.html',
+                           title='Home',
+                           user=user)
